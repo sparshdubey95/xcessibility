@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Xcessbility",
+  "name": "Xcessibility",
   "version": "1.0",
-  "description": "An accessibility tool for disabled users with AI voice assistant and sign language translation.",
+  "description": "AI-powered accessibility tools for differently abled people.",
   "icons": {
     "128": "icon.png"
   },
@@ -10,6 +10,9 @@
     "activeTab",
     "storage",
     "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
   ],
   "background": {
     "service_worker": "background.js"

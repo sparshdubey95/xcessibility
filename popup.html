@@ -1,16 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xcessbility</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xcessibility</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <h2>Xcessbility</h2>
-  <button id="tts-btn">Text-to-Speech</button>
-  <button id="sign-lang-btn">Sign Language Translator</button>
-  <button id="voice-assist-btn">Voice Assistant</button>
+  <div class="popup-container">
+    <header>
+      <img src="icon.png" alt="Xcessibility Icon" class="icon" />
+      <h1>Xcessibility</h1>
+    </header>
+    <p class="description">
+      Accessibility tools for differently abled people using AI-powered voice assistance, text-to-speech, and sign language translation.
+    </p>
+    <div class="voice-settings">
+      <label for="voiceSelect">Choose Voice:</label>
+      <select id="voiceSelect"></select>
+    </div>
+    <div class="button-group">
+      <button id="tts-btn">Text-to-Speech</button>
+      <button id="sign-lang-btn">Sign Language Translator</button>
+      <button id="voice-assist-btn">Voice Assistant</button>
+    </div>
+    <div id="conversation" class="conversation">
+      <!-- Chat bubbles for voice assistant conversation will appear here -->
+    </div>
+    <footer>
+      <small>Version 1.0</small>
+    </footer>
+  </div>
   <script src="popup.js"></script>
 </body>
 </html>

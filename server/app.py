@@ -2,14 +2,13 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import requests
 import logging
+from sign_language import translate_sign_language
 
 app = Flask(__name__)
-CORS(app)  # Enable cross-origin requests
+CORS(app)
 
-# Ensure you replace this with your actual Gemini API key
-GEMINI_API_KEY = "AIzaSyBpy-5a_V4wDsbfTI8XmZfLj7EEVgpvwww"
+GEMINI_API_KEY = "your_gemini_api_key"  # Replace with your actual Gemini API key
 
-# Set up basic logging
 logging.basicConfig(level=logging.DEBUG)
 
 @app.route('/voice', methods=['POST'])
@@ -17,7 +16,6 @@ def voice_assistant():
     user_text = request.json.get("text", "")
     app.logger.debug("Received voice text: %s", user_text)
     try:
-        # Call the Gemini API endpoint (ensure the endpoint is correct)
         response = requests.post(
             "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateText",
             json={"prompt": {"text": user_text}},
@@ -27,8 +25,6 @@ def voice_assistant():
         response.raise_for_status()
         data = response.json()
         app.logger.debug("Gemini API response data: %s", data)
-
-        # Check if the response structure contains candidates
         if "candidates" in data and len(data["candidates"]) > 0:
             ai_response = data["candidates"][0].get("text", "No text returned.")
             return jsonify({"response": ai_response})
@@ -41,8 +37,10 @@ def voice_assistant():
 
 @app.route('/sign-language', methods=['GET'])
 def sign_language():
-    # This is a placeholder. Replace with integration to your sign language translator API.
-    return jsonify({"translation": "Hello (in sign language)"})
+    # Accept a query parameter "text" for translation; use default if not provided.
+    text = request.args.get("text", "hello world")
+    translation_images, avatar_url = translate_sign_language(text)
+    return jsonify({"translation_images": translation_images, "avatar_url": avatar_url})
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, debug=True)
